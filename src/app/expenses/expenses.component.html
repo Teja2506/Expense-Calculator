@@ -1,0 +1,86 @@
+<nav class="navbar bg-dark border-bottom border-bottom-dark" data-bs-theme="dark">
+    <h3 class="text-light ms-5">Expenses Calculator</h3>
+    <button type="button" class="btn btn-outline-success addbtn me-5" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="addExpBtn()">Add Expenses</button>
+</nav>
+  <h1  class="d-flex justify-content-center mt-5" *ngIf="expensesArr.length == 0">{{noExpenses}}</h1>
+<div class="border border-dark border-opacity-10 tablecont" *ngIf="expensesArr.length !== 0">
+  <h4 class="text-center border border-dark border-opacity-10 mt-5 exp">Expenses List</h4>
+<div class="container border border-dark border-opacity-25 mt-5">
+  <div class="d-flex justify-content-center rounded-3">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Expenses</th>
+        <th scope="col">Amount (₹)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let expense of expensesArr">
+        <td>{{expense.Date}}</td>
+        <td>{{expense.Expense}}</td>
+        <td>{{expense.Amount}}</td>
+        <td>
+          <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="editBtn(expense)">Edit</button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button type="button" class="btn btn-outline-danger" (click)="deleteExp(expense.Id)">Delete</button>
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <th class="text-center">Total</th>
+        <th class="text-center">{{Total}}</th>
+        <th></th>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div>
+  <button type="button" class="btn btn-success offset-5" (click)="calculateTotal()">Calculate Total</button>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel" *ngIf="showAdd?true:showEdit">{{modalTitle}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="mb-3">
+                    <label for="date" class="form-label">Date</label>
+                    <input type="date" class="form-control" id="date" required name="Date" [(ngModel)]="expenses.Date">
+                </div>
+                <div class="mb-3">
+                    <label for="Expenses" class="form-label">Expenses</label>
+                    <input type="text" class="form-control" id="Expenses" required name="Expense" [(ngModel)]="expenses.Expense">
+                </div>
+                <div class="mb-3">
+                    <label for="amount">Amount</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">₹</span>
+                        <input type="number" class="form-control" id="amount" aria-label="Amount (to the nearest dollar)" required name="Amount" [(ngModel)]="expenses.Amount">
+                    </div>
+                    <input type="reset" class="btn btn-primary offset-5" value="Reset" *ngIf="expenses.Id == 0">
+                </div>
+            </form>
+        </div> 
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addExpenses()" *ngIf="expenses.Id == 0">Add</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateExpense()" *ngIf="expenses.Id !== 0">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>

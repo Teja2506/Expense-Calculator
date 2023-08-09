@@ -1,10 +1,12 @@
+<div class="container-fluid bg-dark border-bottom border-bottom-dark">
 <nav class="navbar bg-dark border-bottom border-bottom-dark" data-bs-theme="dark">
-    <h3 class="text-light ms-5">Expenses Calculator</h3>
-    <button type="button" class="btn btn-outline-success addbtn me-5" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="addExpBtn()">Add Expenses</button>
+    <h3 class="text-light">Expenses Calculator</h3>
+    <button type="button" class="btn btn-outline-success addbtn" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="addExpBtn()">Add Expenses</button>
 </nav>
+</div>
   <h1  class="d-flex justify-content-center mt-5" *ngIf="expensesArr.length == 0">{{noExpenses}}</h1>
 <div class="border border-dark border-opacity-10 tablecont" *ngIf="expensesArr.length !== 0">
-  <h4 class="text-center border border-dark border-opacity-10 mt-5 exp">Expenses List</h4>
+  <h4 class="container-md text-center border border-dark border-opacity-10 mt-5">Expenses List</h4>
 <div class="container border border-dark border-opacity-25 mt-5">
   <div class="d-flex justify-content-center rounded-3">
   <table class="table">
@@ -13,6 +15,8 @@
         <th scope="col">Date</th>
         <th scope="col">Expenses</th>
         <th scope="col">Amount (₹)</th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -22,7 +26,8 @@
         <td>{{expense.Amount}}</td>
         <td>
           <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="editBtn(expense)">Edit</button>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        <td>
           <button type="button" class="btn btn-outline-danger" (click)="deleteExp(expense.Id)">Delete</button>
         </td>
       </tr>
@@ -30,6 +35,7 @@
         <th></th>
         <th class="text-center">Total</th>
         <th class="text-center">{{Total}}</th>
+        <th></th>
         <th></th>
       </tr>
     </tbody>
